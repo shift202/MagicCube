@@ -55,17 +55,42 @@ public class MagicCube {
         }
     }
 
-    public void draw(GL10 gl) {
+    public void   draw(GL10 gl) {
         gl.glRotatef(mRotateX, 1, 0, 0);
-        gl.glRotatef(mRotateY, 0, 1, 0);
-        gl.glRotatef(mRotateZ, 0, 0, 1);
+        if(mRotateX > 90 && mRotateX < 270){
+            gl.glRotatef(-mRotateY, 0, 1, 0);
+        }
+        else {
+            gl.glRotatef(mRotateY, 0, 1, 0);
+        }
         for (int i = 0; i < mCubes.length; i++) {
             gl.glPushMatrix();
             mCubes[i].draw(gl);
             gl.glPopMatrix();
         }
-        mRotateX += 1;
-        mRotateY += 1;
+    }
+
+    public void setRotate(float rx, float ry){
+        setRotate(rx, ry, 0);
+    }
+
+    public void setRotate(float rx, float ry, float rz){
+        mRotateX += rx;
+        mRotateX = normalizeRotate(mRotateX);
+        mRotateY += ry;
+        mRotateY = normalizeRotate(mRotateY);
+        mRotateZ += rz;
+        mRotateZ = normalizeRotate(mRotateZ);
+    }
+
+    private float normalizeRotate(float angle){
+        while (angle < 0) {
+            angle += 360;
+        }
+        while (angle > 360){
+            angle -= 360;
+        }
+        return angle;
     }
 
     public Cube getCube(int x, int y, int z){

@@ -12,6 +12,9 @@ public class Constants {
     public final static int RIGHT = 4;
     public final static int TOP = 5;
 
+    public final static int EDGE = 6;
+    public final static int CORNER = 18;
+
     public final static float BASE_LEN = 0.5f;
     public final static float SMALL_BASE_LEN = BASE_LEN * 0.9f;
 }

@@ -22,6 +22,16 @@ public class Square {
         mColor = Color.BLACK;
     }
 
+    public Square(float[] vertices){
+        mColor = Color.BLACK;
+        mVertexBufferLen = vertices.length / 3;
+        ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 2 * Float.SIZE / Byte.SIZE);
+        vbb.order(ByteOrder.nativeOrder());
+        vertexBuffer = vbb.asFloatBuffer();
+        vertexBuffer.put(vertices);
+        vertexBuffer.position(0);
+    }
+
     public void setVertices(float[] vertices, float[] colorVertices){
         mVertexBufferLen = vertices.length / 3;
         ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 2 * Float.SIZE / Byte.SIZE);
@@ -65,11 +75,7 @@ public class Square {
 
 
         gl.glColor4f(mColor[0], mColor[1], mColor[2], mColor[3]);
-        gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, mVertexBufferLen, mVertexBufferLen);
-
-//        gl.glColor4f(Color.BLACK[0],Color.BLACK[1], Color.BLACK[2], Color.BLACK[3]);
-//        gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, mVertexBufferLen);
-
+        gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, mVertexBufferLen);
 
         // Disable the vertices buffer.
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);

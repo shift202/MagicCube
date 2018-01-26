@@ -3,6 +3,7 @@ package com.oradt.allen.magiccube;
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -13,8 +14,8 @@ public class MainActivity extends Activity {
     private MagicCube mMagicCube;
     private float downX = 0;
     private float downY = 0;
-    private float currentX = 0;
-    private float currentY = 0;
+    private float previousX = 0;
+    private float previousY = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +28,23 @@ public class MainActivity extends Activity {
         mOpenGLRenderer = new OpenGLRenderer(mMagicCube);
         view.setRenderer(mOpenGLRenderer);
         setContentView(view);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            downX = event.getX();
+            downY = event.getY();
+            previousX = downX;
+            previousY = downY;
+        }
+        else if(event.getAction() == MotionEvent.ACTION_MOVE){
+            float dx = event.getX() - previousX;
+            float dy = event.getY() - previousY;
+            mMagicCube.setRotate(dy, dx);
+            previousX = event.getX();
+            previousY = event.getY();
+        }
+        return super.onTouchEvent(event);
     }
 }
