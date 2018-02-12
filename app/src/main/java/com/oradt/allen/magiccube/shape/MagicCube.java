@@ -55,7 +55,7 @@ public class MagicCube {
         }
     }
 
-    public void   draw(GL10 gl) {
+    public void draw(GL10 gl) {
         gl.glRotatef(mRotateX, 1, 0, 0);
         if(mRotateX > 90 && mRotateX < 270){
             gl.glRotatef(-mRotateY, 0, 1, 0);

@@ -50,6 +50,10 @@ public class Cube {
     private float mTranslateY = 0;
     private float mTranslateZ = 0;
 
+    private float mRotateX = 0;
+    private float mRotateY = 0;
+    private float mRotateZ = 0;
+
     public Cube(){
         mSquare = new Square[26];
         mSquare[BOTTOM] = new Square(pickupVertices(3, 2, 1, 0));
@@ -92,15 +96,17 @@ public class Cube {
         mTranslateZ = tz;
     }
 
+    public void setRotate(float rx, float ry, float rz){
+        mRotateX = rx;
+        mRotateY = ry;
+        mRotateZ = rz;
+    }
+
     public void draw(GL10 gl) {
         gl.glTranslatef(mTranslateX, mTranslateY, mTranslateZ);
         for (int i = 0; i < mSquare.length; i++) {
-//            if(! mSquare[i].isBlack()){
-//
-//            }
             mSquare[i].draw(gl);
         }
-//        gl.glLoadIdentity();
     }
 
     public Square getSquare(int i){

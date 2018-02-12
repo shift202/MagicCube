@@ -17,6 +17,9 @@ public class Square {
     // Our vertex buffer.
     protected FloatBuffer vertexBuffer;
     private int mVertexBufferLen;
+    private float rotateX;
+    private float rotateY;
+    private float rotateZ;
 
     public Square(){
         mColor = Color.BLACK;
@@ -40,6 +43,12 @@ public class Square {
         vertexBuffer.put(vertices);
         vertexBuffer.put(colorVertices);
         vertexBuffer.position(0);
+    }
+
+    public void setRotate(float rx, float ry, float rz){
+        rotateX = rx;
+        rotateY = ry;
+        rotateZ = rz;
     }
 
     public void setColor(float[] Color) {
